@@ -57,8 +57,64 @@
   
 body {
     display: flex;
+    margin: 20px;
    }
 
 .header_of_tasks {
     display: flex;
 }
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.main {
+  
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+}
+
+.newproject {
+  display: flex;
+  background-color: black;
+  border-radius: 20px;
+  justify-content: space-around;
+}
+
+.edit_project_button {
+  background-color: black;
+  color: white;
+  border-style: none;
+}
+
+.edit_project_button:active{
+  background:olive;
+}
+
+
+.project_name {
+  justify-content: center;
+  color: beige;
+}
+
+.projects_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add_project {
+  display: flex;
+  width: 300px;
+  border-radius: 20px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
