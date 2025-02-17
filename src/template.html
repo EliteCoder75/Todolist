@@ -26,29 +26,27 @@
         <div class="tasks_div">
         </div>
     </div>
-      <!-- Form 1 -->
-    <div id="form1" class="form-container">
-    
-    <form>
-        <label for="name1">Name of the project</label>
-        <input type="text" id="name1" name="name1">
-        <button type="submit">Submit Form 1</button>
-    </form>
+
+    <div id="popupOverlay" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">New Project</h2>
+            <form class=".form-container">
+                <input class="project_name" type="text" 
+                        placeholder="Project Name" 
+                        id="project_n" name="name" required>
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup" >
+                    Cancel
+                </button>
+                <button class="btn-create-popup" >
+                    Create
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- Form 2 -->
-    <div id="form2" class="form-container">
-    <h2>Form 2</h2>
-    <form>
-        <label for="name2">Name:</label>
-        <input type="text" id="name2" name="name2">
-        <br>
-        <label for="phone2">Phone:</label>
-        <input type="tel" id="phone2" name="phone2">
-        <br>
-        <button type="submit">Submit Form 2</button>
-    </form>
-    </div>
+    
 
 </body>
 </html>
