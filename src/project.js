@@ -1,35 +1,38 @@
-import img1 from './images/folder-management.png';
-import img2 from './images/edit.png';
+
+import {togglePopup, togglePopup1} from './ui.js';
+import { task } from './task.js';
 
 
-export function project(p_name) {
-    const contentElement = document.querySelector("#content");
-    const newproject = document.createElement("div");
-    const project_name = document.createElement("div");
-    const edit_project_button = document.createElement("button");
 
+export class projects {
+    constructor() {
+        this.projects = [];
+    }
+    addProject(project) {
+        this.projects.push(project);
+    }
 
-    newproject.classList.add("newproject");
-    edit_project_button.classList.add("edit_project_button");
-    const myIcon1 = new Image();
-    
-    myIcon1.src = img1;
-    myIcon1.classList.add("icon");
-    project_name.classList.add("div_project_name");
+    deleteProject(project) {
+        this.projects = this.projects.filter(function(item) {
+            return item !== project;
+        })
+    }
 
-    const myIcon2 = new Image();
-    myIcon2.src = img2;
-    myIcon2.classList.add("icon");
-
-    project_name.textContent = p_name;
-    edit_project_button.textContent = "⋮";
-    newproject.appendChild(myIcon1);
-    newproject.appendChild(project_name);
-    newproject.appendChild(edit_project_button);
-
-    contentElement.appendChild(newproject);
-    return contentElement;
 }
+
+export class Project {
+    constructor(name){
+        this.name = name;
+    }
+}
+
+
+
+
+
+
+
+
 
 
   

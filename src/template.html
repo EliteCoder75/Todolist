@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
-
 </head>
+
 <body>
     <div class="sidebar">
         <div class="logo_container">
@@ -16,7 +16,6 @@
         <div class="projects_container" id="content">
         </div>
         <button class="add_project" type="button"><img class="icon" src="./images/add.png" alt="">New Project</button>
-
     </div>
     <div class="main">
         <div class="header_of_tasks">
@@ -45,8 +44,27 @@
             </div>
         </div>
     </div>
-
     
-
+    <div id="popupOverlay1" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">New Project</h2>
+            <form class=".form-container">
+                <input class="project_name1" type="text" 
+                        placeholder="Project Name" 
+                        id="project_n1" name="name" required>
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup1" >
+                    Cancel
+                </button>
+                <button class="btn-delete-popup" >
+                    Delete
+                </button>
+                <button class="btn-Save-popup" >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
