@@ -3,14 +3,9 @@ import img2 from './images/edit.png';
 import {task} from './task.js';
 export {togglePopup, togglePopup1};
 
-const projects_container = document.querySelector("div.projects_container");
 
-const projectt = document.querySelector("button.add_project");
 const taskss = document.querySelector("button.add_task");
-const create_project = document.querySelector('.btn-create-popup');
-const close_project = document.querySelector('.btn-close-popup');
-
-
+const body = document.querySelector("body");
 
 (function add_tasks(){
     taskss.addEventListener('click', (event)=>
@@ -19,11 +14,6 @@ const close_project = document.querySelector('.btn-close-popup');
         }); }
     )();
 
-/*const sidebar = new projects();
-sidebar.addProject(new Project("bachir"));
-console.log(sidebar);
-*/
-
 
 function togglePopup() {
     const overlay = document.getElementById('popupOverlay');
@@ -31,41 +21,13 @@ function togglePopup() {
 }
 
 function togglePopup1() {
-    const overlay = document.getElementById('popupOverlay1');
-    overlay.classList.toggle('show');
+    const overlay1 = document.getElementById('popupOverlay1');
+    overlay1.classList.toggle('show');
 }
 
-//add project 
-projectt.addEventListener('click', (event)=>
-    {   
-        document.querySelector('.project_name').value = "";
-        togglePopup();       
-    });
 
-//close popup
-close_project.addEventListener('click', (event)=>
-    {   
-        document.querySelector('.project_name').value = "";
-        togglePopup();
-    }
-);
 
-//create pop up for the
-create_project.addEventListener('click', (event)=>
-    {   
-        let p_name = document.querySelector('.project_name').value;
-        if(p_name == ""){
-            alert("empty project name");
-        } else {
-        project(p_name);
-        togglePopup();
-        }
-    }
-);
-
-//project("first_project");
-
-//adding modifying and deleting project logic
+//adding project logic
 function project(p_name) {
 
     var contentElement = document.querySelector("#content");
@@ -73,9 +35,7 @@ function project(p_name) {
     var project_name = document.createElement("div");
     var edit_project_button = document.createElement("button");
     var close_project = document.querySelector('.btn-close-popup1');
-
     //const created_project_name = document.querySelector("div_project_name");
-    
     newproject.classList.add("newproject");
     edit_project_button.classList.add("edit_project_button");
     const myIcon1 = new Image();
@@ -94,32 +54,65 @@ function project(p_name) {
         newproject.appendChild(myIcon1);
         newproject.appendChild(project_name);
         newproject.appendChild(edit_project_button);}
-
-    
     contentElement.appendChild(newproject);
 
 }
 
 
+let selectedProject = null; // Stores the currently edited project
 
-projects_container.addEventListener('click', (event) => {
+// core operation on the sidebar
+body.addEventListener('click', (event) => {
+    //New project
+    if (event.target.classList.contains("btn-create-popup")) { 
+        let p_name = document.querySelector('.project_name').value;
+        if(p_name == ""){
+            alert("empty project name");
+        } else {
+        project(p_name);
+        togglePopup();
+        }
+    }
+    //add project
+    if (event.target.classList.contains("add_project")){   
+        document.querySelector('.project_name').value = "";
+        togglePopup();       
+    }
+
+    // close first popup
+    if (event.target.classList.contains("btn-close-popup")) {   
+        document.querySelector('.project_name').value = "";
+        togglePopup();
+    }
+    //edit project
     if (event.target.classList.contains("edit_project_button")) {
-        const projectName = event.target.parentNode.querySelector(".div_project_name").innerText;
-        document.querySelector('.project_name1').value = projectName;
+        //console.log(event.target.classList); 
+        selectedProject = event.target.parentNode.querySelector(".div_project_name");  //  Store the actual div reference
+        document.querySelector('.project_name1').value = selectedProject.textContent; //  Pre-fill the input
         togglePopup1();
     }
-});
-
-
-
-
-
-document.getElementById("popupOverlay1").addEventListener("click", (event) => {
+    // close popup1
     if (event.target.classList.contains("btn-close-popup1")) {
         togglePopup1();  // Close the popup
         document.querySelector('.project_name1').value = ""; // Clear input field
     }
+    // save the project's name 
+    if (event.target.classList.contains("btn-Save-popup1")) {
+        if (selectedProject) {
+            selectedProject.textContent = document.querySelector('.project_name1').value;  // Directly update the selected project
+        }
+        togglePopup1(); //  Close the popup
+    }
+    // delete the project
+    if (event.target.classList.contains("btn-delete-popup1")) {
+        if (selectedProject) {
+            selectedProject.parentNode.remove(); // Directly update the selected project
+            togglePopup1(); //  Close the popup
+        }
+    }
 });
+
+
 
 
 

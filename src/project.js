@@ -18,11 +18,15 @@ export class projects {
         })
     }
 
+    //edit_project .....
+
 }
 
 export class Project {
     constructor(name){
         this.name = name;
+        //tasks also
+        //this.tasks = [];
     }
 }
 
