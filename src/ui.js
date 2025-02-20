@@ -113,13 +113,13 @@ projects_container.addEventListener('click', (event) => {
 
 
 
-/*
+
 document.getElementById("popupOverlay1").addEventListener("click", (event) => {
     if (event.target.classList.contains("btn-close-popup1")) {
         togglePopup1();  // Close the popup
         document.querySelector('.project_name1').value = ""; // Clear input field
     }
-});*/
+});
 
 
 
