@@ -14,15 +14,12 @@ export class ProjectManager {
     }
 
     deleteProject(name) {
-        this.projects = this.projects.filter(function(item) {
-            return item !== name;
-        })
+        this.projects.splice(this.projects.findIndex(v => v.name === name), 1);
     }
 
     editProject(newName, oldName){
         var project = this.projects.find((project) => project.name === oldName);
         project.name = newName;
-        
     }
 
     getProjects(){

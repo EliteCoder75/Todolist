@@ -115,6 +115,9 @@ const projectsContainer = document.querySelector("#content");
 const addProjectBtn = document.querySelector(".add_project");
 const createProjectBtn = document.querySelector(".btn-create-popup");
 const closeProjectBtn = document.querySelector(".btn-close-popup");
+const closeEditBtn = document.querySelector(".btn-close-popup1");
+const deleteProjectBtn = document.querySelector(".btn-delete-popup1");
+const saveprojectNameBtn = document.querySelector(".btn-Save-popup1");
 const popupOverlay = document.getElementById('popupOverlay');
 const popupOverlay1 = document.getElementById('popupOverlay1');
 const body = document.querySelector("body");
@@ -131,10 +134,6 @@ function togglePopup1() {
 
 
 
-function removeProject (name) {
-    projectManager.removeProject(name);
-    renderProjects();
-}
 
 
 let selectedProject = null;
@@ -151,16 +150,8 @@ function renderProjects () {
             <button class="edit_project_button">⋮</button>
         ` 
         projectsContainer.appendChild(newproject);
-
-        //selectedProject = project.name;
-        //const edit_project_button = document.querySelector("edit_project_button");
-       
-
-        
-           
     });
-
-    } 
+} 
 
 //diplay popup to add new project //add_project
 addProjectBtn.addEventListener('click', (event)  => {
@@ -174,7 +165,7 @@ createProjectBtn.addEventListener('click', (event)  => {
         alert("empty project name");
     } else {
     projectManager.addProject(p_name);
-    //console.log(projectManager.getProjects());
+    console.log(projectManager.getProjects());
     renderProjects();
     togglePopup();
     }
@@ -183,12 +174,24 @@ createProjectBtn.addEventListener('click', (event)  => {
 body.addEventListener('click', (event) => {
     //edit_popup
     if (event.target.classList.contains("edit_project_button")) {
-        selectedProject = event.target.parentNode.querySelector(".div_project_name"); 
-        console.log(selectedProject.innerText);
-        document.querySelector('.project_name1').value = selectedProject.innerText;
+        selectedProject = event.target.parentNode.querySelector(".div_project_name").innerText; 
+        console.log(selectedProject);
+        document.querySelector('.project_name1').value = selectedProject;
         togglePopup1();      
     }
 });
+
+deleteProjectBtn.addEventListener('click', (event)  => {
+    console.log(projectManager.getProjects());
+    projectManager.deleteProject(selectedProject);
+    renderProjects();
+    togglePopup1();
+});
+
+
+
+
+
     
 
 
