@@ -1,12 +1,11 @@
 import img1 from './images/folder-management.png';
 import img2 from './images/edit.png';
 import {task} from './task.js';
-export {togglePopup, togglePopup1};
-
-
+import {project, projects} from './project.js';
+export {renderProjects};
+/*export {togglePopup, togglePopup1};
 const taskss = document.querySelector("button.add_task");
 const body = document.querySelector("body");
-
 (function add_tasks(){
     taskss.addEventListener('click', (event)=>
         {
@@ -14,21 +13,17 @@ const body = document.querySelector("body");
         }); }
     )();
 
-
 function togglePopup() {
     const overlay = document.getElementById('popupOverlay');
     overlay.classList.toggle('show');
 }
-
 function togglePopup1() {
     const overlay1 = document.getElementById('popupOverlay1');
     overlay1.classList.toggle('show');
 }
 
-
-
 //adding project logic
-function project(p_name) {
+function proj(p_name) {
 
     var contentElement = document.querySelector("#content");
     var newproject = document.createElement("div");
@@ -58,9 +53,7 @@ function project(p_name) {
 
 }
 
-
 let selectedProject = null; // Stores the currently edited project
-
 // core operation on the sidebar
 body.addEventListener('click', (event) => {
     //New project
@@ -69,7 +62,7 @@ body.addEventListener('click', (event) => {
         if(p_name == ""){
             alert("empty project name");
         } else {
-        project(p_name);
+        proj(p_name);
         togglePopup();
         }
     }
@@ -112,10 +105,81 @@ body.addEventListener('click', (event) => {
     }
 });
 
+*/
+
+
+import { ProjectManager } from './project.js';
+
+const projectManager = new ProjectManager();
+const projectsContainer = document.querySelector("#content");
+const addProjectBtn = document.querySelector(".add_project");
+const createProjectBtn = document.querySelector(".btn-create-popup");
+const closeProjectBtn = document.querySelector(".btn-close-popup");
+const popupOverlay = document.getElementById('popupOverlay');
+const popupOverlay1 = document.getElementById('popupOverlay1');
+
+
+// toggle popups 
+function togglePopup() {
+    popupOverlay.classList.toggle('show');
+}
+function togglePopup1() {
+    popupOverlay1.classList.toggle('show');
+}
 
 
 
 
+function removeProject (name) {
+    projectManager.removeProject(name);
+    renderProjects();
+}
+
+
+let selectedProject = null;
+
+function renderProjects () {
+
+    projectsContainer.innerHTML = "";
+    projectManager.getProjects().forEach(project => {
+        var newproject = document.createElement("div");
+        newproject.classList.add("newproject"); // also removed the dot prefix here
+        newproject.innerHTML = `
+            <img src="./images/folder-management.png" class="icon">
+            <div class="div_project_name">${project.name}</div>
+            <button class="edit_project_button">⋮</button>
+        ` 
+        projectsContainer.appendChild(newproject);
+
+        //selectedProject = project.name;
+        /*if (classList.contains("edit_project_button")) {
+            //console.log(event.target.classList); 
+            selectedProject = event.target.parentNode.querySelector(".div_project_name");  //  Store the actual div reference
+            document.querySelector('.project_name1').value = selectedProject.textContent; //  Pre-fill the input
+            togglePopup1();
+        }*/   
+    });
+} 
+
+//diplay popup to add new project //add_project
+addProjectBtn.addEventListener('click', (event)  => {
+    document.querySelector('.project_name').value = "";
+    togglePopup();       
+});   
+    
+createProjectBtn.addEventListener('click', (event)  => {
+    let p_name = document.querySelector('.project_name').value;
+    if(p_name == ""){
+        alert("empty project name");
+    } else {
+    projectManager.addProject(p_name);
+    console.log(projectManager.getProjects());
+    renderProjects();
+    togglePopup();
+    }
+});
+
+    
 
 
 

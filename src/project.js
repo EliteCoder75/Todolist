@@ -1,23 +1,33 @@
 
 import {togglePopup, togglePopup1} from './ui.js';
-import { task } from './task.js';
+import { Task } from './task.js';
 
 
-
-export class projects {
+export class ProjectManager {
     constructor() {
         this.projects = [];
     }
-    addProject(project) {
-        this.projects.push(project);
+    addProject(name) {
+        var newProject = new Project(name);
+        this.projects.push(newProject);
+        return newProject;
     }
 
-    deleteProject(project) {
+    deleteProject(name) {
         this.projects = this.projects.filter(function(item) {
-            return item !== project;
+            return item !== name;
         })
     }
 
+    editProject(newName, oldName){
+        var project = this.projects.find((project) => project.name === oldName);
+        project.name = newName;
+        
+    }
+
+    getProjects(){
+        return this.projects;
+    }
     //edit_project .....
 
 }
@@ -25,17 +35,19 @@ export class projects {
 export class Project {
     constructor(name){
         this.name = name;
-        //tasks also
-        //this.tasks = [];
+        this.tasks = [];
+    }
+
+    addTask(name){
+        var task = new Task(name);
+        this.tasks.push(task);
+        return task;
+    }
+
+    removeTask(name){
+        this.tasks = this.tasks.filter ( item => item!==name);
     }
 }
-
-
-
-
-
-
-
 
 
 
