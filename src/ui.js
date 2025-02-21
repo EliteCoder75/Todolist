@@ -32,6 +32,8 @@ const popupOverlay1 = document.getElementById('popupOverlay1');
 const body = document.querySelector("body");
 
 const addTaskBtn = document.querySelector(".add_task");
+const closeTaskBtn = document.querySelector(".btn-close-popup2");
+
 
 
 // toggle popups for projects
@@ -48,9 +50,13 @@ function toggleTaskPopup() {
 }
 
 addTaskBtn.addEventListener('click', (event)  => {
-    document.querySelector('.project_name').value = "";
     toggleTaskPopup();       
 })
+
+closeTaskBtn.addEventListener('click', (event)  => {
+    toggleTaskPopup();       
+})
+
 
 let selectedProject = null;
 

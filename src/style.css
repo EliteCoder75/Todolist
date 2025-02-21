@@ -194,7 +194,7 @@ body {
   color: white;
 }
 .btn-create-popup,
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1 {
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
@@ -207,7 +207,7 @@ body {
   color: #fff;
 }
 
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1 {
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1, .btn-close-popup2{
   margin-top: 12px;
   background-color: #e74c3c;
   color: #fff;
