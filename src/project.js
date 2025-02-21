@@ -17,7 +17,7 @@ export class ProjectManager {
         this.projects.splice(this.projects.findIndex(v => v.name === name), 1);
     }
 
-    editProject(newName, oldName){
+    editProject(newName, oldName) {
         var project = this.projects.find((project) => project.name === oldName);
         project.name = newName;
     }
@@ -44,6 +44,7 @@ export class Project {
     removeTask(name){
         this.tasks = this.tasks.filter ( item => item!==name);
     }
+
 }
 
 
