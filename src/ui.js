@@ -134,7 +134,6 @@ function togglePopup1() {
 let selectedProject = null;
 
 function renderProjects () {
-
     projectsContainer.innerHTML = "";
     projectManager.getProjects().forEach(project => {
         var newproject = document.createElement("div");
@@ -178,6 +177,14 @@ body.addEventListener('click', (event) => {
     if (event.target.classList.contains("btn-close-popup1")){
         togglePopup1();
     }
+
+    //save name of the project whether modified or the same
+    if (event.target.classList.contains("btn-Save-popup1")){
+        var ne = document.querySelector(".project_name1").value;
+        var old = selectedProject;
+        projectManager.editProject(ne, old);
+        renderProjects();
+    }
 });
 
 deleteProjectBtn.addEventListener('click', (event)  => {
@@ -191,6 +198,9 @@ deleteProjectBtn.addEventListener('click', (event)  => {
 closeProjectBtn.addEventListener('click', (event)  => {
     togglePopup();
 });
+
+
+
 
 
 
