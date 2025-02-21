@@ -131,11 +131,6 @@ function togglePopup1() {
     popupOverlay1.classList.toggle('show');
 }
 
-
-
-
-
-
 let selectedProject = null;
 
 function renderProjects () {
@@ -188,7 +183,10 @@ deleteProjectBtn.addEventListener('click', (event)  => {
     togglePopup1();
 });
 
-
+// close add project popup
+closeProjectBtn.addEventListener('click', (event)  => {
+    togglePopup();
+});
 
 
 
