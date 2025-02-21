@@ -174,6 +174,10 @@ body.addEventListener('click', (event) => {
         document.querySelector('.project_name1').value = selectedProject;
         togglePopup1();      
     }
+    // close edit popup
+    if (event.target.classList.contains("btn-close-popup1")){
+        togglePopup1();
+    }
 });
 
 deleteProjectBtn.addEventListener('click', (event)  => {
@@ -187,6 +191,8 @@ deleteProjectBtn.addEventListener('click', (event)  => {
 closeProjectBtn.addEventListener('click', (event)  => {
     togglePopup();
 });
+
+
 
 
 
