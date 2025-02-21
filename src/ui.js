@@ -117,6 +117,7 @@ const createProjectBtn = document.querySelector(".btn-create-popup");
 const closeProjectBtn = document.querySelector(".btn-close-popup");
 const popupOverlay = document.getElementById('popupOverlay');
 const popupOverlay1 = document.getElementById('popupOverlay1');
+const body = document.querySelector("body");
 
 
 // toggle popups 
@@ -152,14 +153,14 @@ function renderProjects () {
         projectsContainer.appendChild(newproject);
 
         //selectedProject = project.name;
-        /*if (classList.contains("edit_project_button")) {
-            //console.log(event.target.classList); 
-            selectedProject = event.target.parentNode.querySelector(".div_project_name");  //  Store the actual div reference
-            document.querySelector('.project_name1').value = selectedProject.textContent; //  Pre-fill the input
-            togglePopup1();
-        }*/   
+        //const edit_project_button = document.querySelector("edit_project_button");
+       
+
+        
+           
     });
-} 
+
+    } 
 
 //diplay popup to add new project //add_project
 addProjectBtn.addEventListener('click', (event)  => {
@@ -173,12 +174,21 @@ createProjectBtn.addEventListener('click', (event)  => {
         alert("empty project name");
     } else {
     projectManager.addProject(p_name);
-    console.log(projectManager.getProjects());
+    //console.log(projectManager.getProjects());
     renderProjects();
     togglePopup();
     }
 });
 
+body.addEventListener('click', (event) => {
+    //edit_popup
+    if (event.target.classList.contains("edit_project_button")) {
+        selectedProject = event.target.parentNode.querySelector(".div_project_name"); 
+        console.log(selectedProject.innerText);
+        document.querySelector('.project_name1').value = selectedProject.innerText;
+        togglePopup1();      
+    }
+});
     
 
 
