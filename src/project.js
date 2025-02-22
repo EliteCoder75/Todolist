@@ -39,8 +39,8 @@ export class Project {
         this.tasks = [];
     }
 
-    addTask(name){
-        var task = new Task(name);
+    addTask(name, priority, description){
+        var task = new Task(name, priority, description);
         this.tasks.push(task);
         return task;
     }

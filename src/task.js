@@ -8,19 +8,27 @@ export function task() {
 }
 
 export class Task {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, priority, description, dueDate) {
         this.title = title;
+        this.priority = priority;
         this.description = description;
         this.dueDate = new Date(dueDate);
-        this.priority = priority;
+        
     }
 
     editTitle (title) {
         this.title = title;
     }
 
-    getName (){
+    getTaskName () {
         return this.title;
+    }
+
+    getPriority () {
+        return this.priority;
+    }
+    getDescription () {
+        return this.description;
     }
 
     editDescription (description) {

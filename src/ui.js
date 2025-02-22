@@ -147,18 +147,24 @@ let current_project = null;
 createTaskBtn.addEventListener('click', (event)  => {
     //let current_project = projectManager.getProjectByName(selectedProject);
     let t_name = document.querySelector('.task_name').value;
+    // retrieve selected option
+    let e = document.getElementById("priority_id");
+    let selectedOption = e.options[e.selectedIndex].text; 
+    console.log(selectedOption);
+    // retrieve selected description  
+    let description = document.querySelector("#description").value;
+    console.log(description);
     if(t_name == ""){
-        alert("empty project name");
+        alert("empty task name");
     } else {
-
     current_project = projectManager.getProjectByName(selectedProject);
-    current_project.addTask(t_name);
-    console.log(current_project.getTasks());
+    current_project.addTask(t_name, selectedOption,description);
+    console.log (current_project);
+    //console.log(current_project.getTasks());
     toggleTaskPopup();  
     }
     renderTasks(selectedProject);    
 })
-
 
 function renderTasks (selectedProj) {
 
@@ -168,12 +174,14 @@ function renderTasks (selectedProj) {
         var newtask = document.createElement("div");
         newtask.classList.add("newtask"); // also removed the dot prefix here
         newtask.innerHTML = `
-            <div class="div_task_name">${task.getName()}</div>
+            <div class="div_task_name">${task.getTaskName()}</div>
+            <div class="priority">${task.getPriority()}</div>
+            <div class="description">${task.getDescription()}</div>
+
         ` 
         tasks_container.appendChild(newtask);
     });
 }
-
 
 body.addEventListener('click', (event) => {
    
@@ -181,6 +189,7 @@ body.addEventListener('click', (event) => {
         selectedProject = event.target.children[1].innerText; 
         renderTasks(selectedProject);    
     }
+
 });
 
 
