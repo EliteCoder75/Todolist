@@ -29,12 +29,14 @@ const deleteProjectBtn = document.querySelector(".btn-delete-popup1");
 const saveprojectNameBtn = document.querySelector(".btn-Save-popup1");
 const popupOverlay = document.getElementById('popupOverlay');
 const popupOverlay1 = document.getElementById('popupOverlay1');
+const popupOverlay2 = document.getElementById('popupOverlay2');
 const body = document.querySelector("body");
 
 const addTaskBtn = document.querySelector(".add_task");
 const closeTaskBtn = document.querySelector(".btn-close-popup2");
 const createTaskBtn = document.querySelector(".btn-create-task");
 const tasks_container = document.querySelector(".tasks_div");
+const task_name = document.querySelector(".task_name");
 
 
 
@@ -52,6 +54,7 @@ function togglePopup1() {
 
 // toggle popup for tasks
 function toggleTaskPopup() {
+    task_name.value = "";
     popupOverlay2.classList.toggle('show');
 }
 
@@ -170,6 +173,7 @@ function renderTasks (selectedProj) {
         tasks_container.appendChild(newtask);
     });
 }
+
 
 body.addEventListener('click', (event) => {
    
