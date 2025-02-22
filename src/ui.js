@@ -2,6 +2,8 @@ import img1 from './images/folder-management.png';
 import img2 from './images/edit.png';
 import {Task, task} from './task.js';
 import {project, projects} from './project.js';
+import { compareAsc, format, parseISO} from "date-fns";
+
 export {renderProjects};
 
 
@@ -154,13 +156,20 @@ createTaskBtn.addEventListener('click', (event)  => {
     // retrieve selected description  
     let description = document.querySelector("#description").value;
     console.log(description);
+    // retrieve Date
+    let dateEntered = document.getElementById("date").value;
+    console.log(dateEntered); // it displays 2025-02-28
+    let aa = String(dateEntered);
+    console.log(aa);
+
+
     if(t_name == ""){
         alert("empty task name");
     } else {
     current_project = projectManager.getProjectByName(selectedProject);
-    current_project.addTask(t_name, selectedOption,description);
-    console.log (current_project);
-    //console.log(current_project.getTasks());
+    current_project.addTask(t_name, selectedOption,description, String(dateEntered));
+    //console.log(task.getDate());
+    
     toggleTaskPopup();  
     }
     renderTasks(selectedProject);    
@@ -171,13 +180,16 @@ function renderTasks (selectedProj) {
     tasks_container.innerHTML = "";
     current_project = projectManager.getProjectByName(selectedProj);
     current_project.getTasks().forEach(task => {
+        // add it after with getDate()
+        //console.log(task.getDate());
+
         var newtask = document.createElement("div");
         newtask.classList.add("newtask"); // also removed the dot prefix here
         newtask.innerHTML = `
             <div class="div_task_name">${task.getTaskName()}</div>
             <div class="priority">${task.getPriority()}</div>
             <div class="description">${task.getDescription()}</div>
-
+            <div class="date_entered">2025-02-27</div>
         ` 
         tasks_container.appendChild(newtask);
     });

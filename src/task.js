@@ -1,18 +1,14 @@
+import { format,isValid, parseISO } from 'date-fns';
 
-export function task() {
-    const contentElement = document.querySelector(".tasks_div");
-    const newtask = document.createElement("p");
-    newtask.textContent = "task1"
-    contentElement.appendChild(newtask);
-    return contentElement;
-}
 
 export class Task {
     constructor(title, priority, description, dueDate) {
         this.title = title;
         this.priority = priority;
         this.description = description;
-        this.dueDate = new Date(dueDate);
+        // Ensure `dueDate` is a valid Date object
+        // Ensure the date is valid before assigning
+        this.dueDate = dueDate;
         
     }
 
@@ -30,6 +26,10 @@ export class Task {
     getDescription () {
         return this.description;
     }
+
+    getDate() {
+        return this.dueDate;
+    }  
 
     editDescription (description) {
         this.description = description;
