@@ -106,7 +106,10 @@ body.addEventListener('click', (event) => {
         var ne = document.querySelector(".project_name1").value;
         var old = selectedProject;
         projectManager.editProject(ne, old);
+        selectedProject = ne;
         renderProjects();
+        togglePopup1();
+
     }
 });
 
