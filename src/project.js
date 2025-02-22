@@ -25,6 +25,10 @@ export class ProjectManager {
     getProjects(){
         return this.projects;
     }
+
+    getProjectByName(name){
+        return this.projects.find((project) => project.name === name);
+    }
     //edit_project .....
 
 }
@@ -43,6 +47,10 @@ export class Project {
 
     removeTask(name){
         this.tasks = this.tasks.filter ( item => item!==name);
+    }
+
+    getTasks(){
+        return this.tasks;
     }
 
 }

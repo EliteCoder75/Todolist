@@ -33,8 +33,14 @@ const body = document.querySelector("body");
 
 const addTaskBtn = document.querySelector(".add_task");
 const closeTaskBtn = document.querySelector(".btn-close-popup2");
+const createTaskBtn = document.querySelector(".btn-create-task");
+const tasks_container = document.querySelector(".tasks_div");
 
 
+
+// adding default project 
+projectManager.addProject("Homeworks");
+let selectedProject = projectManager.getProjects()[0].name;
 
 // toggle popups for projects
 function togglePopup() {
@@ -49,16 +55,6 @@ function toggleTaskPopup() {
     popupOverlay2.classList.toggle('show');
 }
 
-addTaskBtn.addEventListener('click', (event)  => {
-    toggleTaskPopup();       
-})
-
-closeTaskBtn.addEventListener('click', (event)  => {
-    toggleTaskPopup();       
-})
-
-
-let selectedProject = null;
 
 function renderProjects () {
     projectsContainer.innerHTML = "";
@@ -66,7 +62,7 @@ function renderProjects () {
         var newproject = document.createElement("div");
         newproject.classList.add("newproject"); // also removed the dot prefix here
         newproject.innerHTML = `
-            <img src="./images/folder-management.png" class="icon">
+            <img src="${img1}" class="icon">
             <div class="div_project_name">${project.name}</div>
             <button class="edit_project_button">⋮</button>
         ` 
@@ -125,6 +121,62 @@ deleteProjectBtn.addEventListener('click', (event)  => {
 closeProjectBtn.addEventListener('click', (event)  => {
     togglePopup();
 });
+
+/// task part 
+
+addTaskBtn.addEventListener('click', (event)  => {
+    toggleTaskPopup();       
+})
+
+closeTaskBtn.addEventListener('click', (event)  => {
+    toggleTaskPopup();       
+})
+
+
+//console.log(selectedProject);
+//console.log(projectManager.getProjectByName(selectedProject));
+
+let current_project = null;
+
+createTaskBtn.addEventListener('click', (event)  => {
+    //let current_project = projectManager.getProjectByName(selectedProject);
+    let t_name = document.querySelector('.task_name').value;
+    if(t_name == ""){
+        alert("empty project name");
+    } else {
+
+    current_project = projectManager.getProjectByName(selectedProject);
+    current_project.addTask(t_name);
+    console.log(current_project.getTasks());
+    toggleTaskPopup();  
+    }
+    renderTasks(selectedProject);    
+})
+
+
+function renderTasks (selectedProj) {
+
+    tasks_container.innerHTML = "";
+    current_project = projectManager.getProjectByName(selectedProj);
+    current_project.getTasks().forEach(task => {
+        var newtask = document.createElement("div");
+        newtask.classList.add("newtask"); // also removed the dot prefix here
+        newtask.innerHTML = `
+            <div class="div_task_name">${task.getName()}</div>
+        ` 
+        tasks_container.appendChild(newtask);
+    });
+}
+
+body.addEventListener('click', (event) => {
+   
+    if (event.target.classList.contains("newproject")) {
+        selectedProject = event.target.children[1].innerText; 
+        renderTasks(selectedProject);    
+    }
+});
+
+
 
 
 

@@ -192,7 +192,14 @@ body {
 
 .div_project_name {
   color: white;
+  align-content: center;
 }
+
+.div_task_name {
+  color: black;
+  align-content: center;
+}
+
 .btn-create-popup,
 .btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task {
   padding: 12px 24px;

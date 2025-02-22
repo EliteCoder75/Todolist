@@ -19,6 +19,10 @@ export class Task {
         this.title = title;
     }
 
+    getName (){
+        return this.title;
+    }
+
     editDescription (description) {
         this.description = description;
     }
