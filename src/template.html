@@ -110,5 +110,51 @@
         </div>
     </div>
 
+    <div id="popupOverlay3" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">Task</h2>
+            <form class=".form-container">
+                <label>Name</label>
+                <br>
+                <input class="task_name" type="text" 
+                        placeholder="Task Name" 
+                        id="task_name_id" name="name" required>
+                        <br>
+                        <br>     
+                <label>Priority</label>
+                <br>
+                <select name="priority" id="priority_id" class="task_priority">
+                    <option value="first">High</option>
+                    <option value="second" selected>Medium</option>
+                    <option value="third">Low</option>
+                </select>
+                <br> 
+                <br>
+                <label>description</label>
+                <br>
+                <textarea id="description" name="description" rows="5" cols="33">
+                </textarea>
+                <br>
+                <br>
+                <label>Date</label>
+                <br>
+                <input type="date" id="date" name="tday" />
+                <br><br>
+                
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup3" >
+                    Cancel
+                </button>
+                <button class="btn-delete-task-popup3" >
+                    Delete
+                </button>
+                <button class="btn-save-task-popup3" >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

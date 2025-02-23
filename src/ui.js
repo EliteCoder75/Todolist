@@ -7,18 +7,6 @@ import { compareAsc, format, parseISO} from "date-fns";
 export {renderProjects};
 
 
-/*
-const taskss = document.querySelector("button.add_task");
-
-
-(function add_tasks(){
-    taskss.addEventListener('click', (event)=>
-        {
-            task(); 
-        }); }
-    )();
-*/
-
 import { ProjectManager } from './project.js';
 
 const projectManager = new ProjectManager();
@@ -39,6 +27,9 @@ const closeTaskBtn = document.querySelector(".btn-close-popup2");
 const createTaskBtn = document.querySelector(".btn-create-task");
 const tasks_container = document.querySelector(".tasks_div");
 const task_name = document.querySelector(".task_name");
+const closeEditTaskBtn = document.querySelector(".btn-close-popup3");
+const deleteEditTaskBtn = document.querySelector(".btn-delete-task-popup3");
+const saveEditTaskBtn = document.querySelector(".btn-save-task-popup3");
 
 
 
@@ -159,8 +150,6 @@ createTaskBtn.addEventListener('click', (event)  => {
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
     console.log(dateEntered); // it displays 2025-02-28
-    let aa = String(dateEntered);
-    console.log(aa);
 
 
     if(t_name == ""){
@@ -179,14 +168,18 @@ function renderTasks (selectedProj) {
 
     tasks_container.innerHTML = "";
     current_project = projectManager.getProjectByName(selectedProj);
+    //console.log(current_project);
+    console.log(current_project.getTasks());
     current_project.getTasks().forEach(task => {
         // add it after with getDate()
         //console.log(task.getDate());
-
         var newtask = document.createElement("div");
         newtask.classList.add("newtask"); // also removed the dot prefix here
         newtask.innerHTML = `
-            <div class="div_task_name">${task.getTaskName()}</div>
+            <div class="checkcontainer">
+                <div class="div_task_name">${task.getTaskName()}</div>
+                <input type="checkbox" id="myCheck">
+            </div>    
             <div class="priority">${task.getPriority()}</div>
             <div class="description">${task.getDescription()}</div>
             <div class="date_entered">2025-02-27</div>
@@ -197,10 +190,10 @@ function renderTasks (selectedProj) {
 
 body.addEventListener('click', (event) => {
    
-    if (event.target.classList.contains("newproject")) {
+    /*if (event.target.classList.contains("newproject")) { 
         selectedProject = event.target.children[1].innerText; 
         renderTasks(selectedProject);    
-    }
+    }*/
 
 });
 

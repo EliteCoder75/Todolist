@@ -208,13 +208,10 @@ body {
   align-self: center;
 }
 
-.div_task_name {
-  color: black;
-  align-content: center;
-}
+
 
 .btn-create-popup,
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task {
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task, .priority {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
@@ -227,7 +224,7 @@ body {
   color: #fff;
 }
 
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1, .btn-close-popup2{
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1, .btn-close-popup2, .priority{
   margin-top: 12px;
   background-color: #e74c3c;
   color: #fff;
@@ -271,6 +268,38 @@ body {
   height: 200px;
   background-color:#f0f0f0d6;
   border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.div_task_name {
+  flex: 2 1 auto;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  height: 30px;
+  overflow: hidden;
+
+}
+
+.checkcontainer {
+  width: 180px;
+  display: flex;
+  gap: 15px;
+}
+
+#checkbox {
+}
+
+.priority {
+  width: 100px;
+}
+
+.description {
+  overflow: hidden;
+
 }
 
 
