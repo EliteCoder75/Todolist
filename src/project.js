@@ -53,6 +53,10 @@ export class Project {
         return this.tasks;
     }
 
+    getTaskByName(name){
+        return this.tasks.find((task) => task.name === name);
+    }
+
 }
 
 

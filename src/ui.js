@@ -30,6 +30,8 @@ const task_name = document.querySelector(".task_name");
 const closeEditTaskBtn = document.querySelector(".btn-close-popup3");
 const deleteEditTaskBtn = document.querySelector(".btn-delete-task-popup3");
 const saveEditTaskBtn = document.querySelector(".btn-save-task-popup3");
+const popupOverlay3 = document.getElementById('popupOverlay3');
+
 
 
 
@@ -48,7 +50,14 @@ function togglePopup1() {
 // toggle popup for tasks
 function toggleTaskPopup() {
     task_name.value = "";
+    document.querySelector("#description").value = "";
+    document.querySelector("input[type=date]").value = "";
     popupOverlay2.classList.toggle('show');
+}
+
+
+function toggleTaskEditPopup() {
+    popupOverlay3.classList.toggle('show');
 }
 
 
@@ -132,9 +141,6 @@ closeTaskBtn.addEventListener('click', (event)  => {
 })
 
 
-//console.log(selectedProject);
-//console.log(projectManager.getProjectByName(selectedProject));
-
 let current_project = null;
 
 createTaskBtn.addEventListener('click', (event)  => {
@@ -143,15 +149,10 @@ createTaskBtn.addEventListener('click', (event)  => {
     // retrieve selected option
     let e = document.getElementById("priority_id");
     let selectedOption = e.options[e.selectedIndex].text; 
-    console.log(selectedOption);
     // retrieve selected description  
     let description = document.querySelector("#description").value;
-    console.log(description);
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
-    console.log(dateEntered); // it displays 2025-02-28
-
-
     if(t_name == ""){
         alert("empty task name");
     } else {
@@ -188,12 +189,51 @@ function renderTasks (selectedProj) {
     });
 }
 
+let selectedTask = null;
+let p = projectManager.getProjectByName(selectedProject);
+
+// code need more refactoring 
 body.addEventListener('click', (event) => {
    
-    /*if (event.target.classList.contains("newproject")) { 
-        selectedProject = event.target.children[1].innerText; 
-        renderTasks(selectedProject);    
-    }*/
+    if (event.target.matches('.priority, .description, .date_entered')) { 
+        selectedTask = event.target.parentNode.querySelector(".checkcontainer .div_task_name").innerText;
+        document.querySelector('#task_name_id1').value = selectedTask;
+        let tsk = p.getTaskByName(selectedTask);
+        document.querySelector('#description1').value = tsk.getDescription();
+        let e = document.querySelector('#priority_id1');
+        e.options[e.selectedIndex].text = tsk.getPriority(); 
+        toggleTaskEditPopup();   
+    }
+
+    if (event.target.matches('.div_task_name')) {  
+        selectedTask = event.target.innerText;
+        document.querySelector('#task_name_id1').value = selectedTask;
+        let tsk = p.getTaskByName(selectedTask);
+        document.querySelector('#description1').value = tsk.getDescription();
+        let e = document.querySelector('#priority_id1');
+        e.options[e.selectedIndex].text = tsk.getPriority(); 
+        toggleTaskEditPopup();   
+    }
+
+    if (event.target.matches('.newtask')) {  
+        selectedTask = event.target.querySelector(".checkcontainer .div_task_name").innerText;
+        document.querySelector('#task_name_id1').value = selectedTask;
+        let tsk = p.getTaskByName(selectedTask);
+        document.querySelector('#description1').value = tsk.getDescription();
+        let e = document.querySelector('#priority_id1');
+        e.options[e.selectedIndex].text = tsk.getPriority(); 
+        toggleTaskEditPopup();   
+    }
+
+
+    
+
+    if (event.target.matches('.btn-close-popup3')) { 
+        /*selectedProject = event.target.parentNode.querySelector(".div_project_name").innerText; 
+        console.log(selectedProject);
+        document.querySelector('.project_name1').value = selectedProject;*/
+        toggleTaskEditPopup();   
+    }
 
 });
 

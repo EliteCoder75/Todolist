@@ -2,8 +2,8 @@ import { format,isValid, parseISO } from 'date-fns';
 
 
 export class Task {
-    constructor(title, priority, description, dueDate) {
-        this.title = title;
+    constructor(name, priority, description, dueDate) {
+        this.name = name;
         this.priority = priority;
         this.description = description;
         // Ensure `dueDate` is a valid Date object
@@ -12,12 +12,12 @@ export class Task {
         
     }
 
-    editTitle (title) {
-        this.title = title;
+    editname (name) {
+        this.name = name;
     }
 
     getTaskName () {
-        return this.title;
+        return this.name;
     }
 
     getPriority () {
