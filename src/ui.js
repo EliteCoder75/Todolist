@@ -32,6 +32,14 @@ const saveEditTaskBtn = document.querySelector(".btn-save-task-popup3");
 const popupOverlay3 = document.getElementById('popupOverlay3');
 
 
+//begin with projects
+let itemsArray = localStorage.getItem('items') ?
+JSON.parse(localStorage.getItem('items')) : [];
+
+
+itemsArray.forEach(item  => projectManager.addProject(item));
+
+
 
 
 // adding default project 
@@ -79,7 +87,7 @@ addProjectBtn.addEventListener('click', (event)  => {
     document.querySelector('.project_name').value = "";
     togglePopup();       
 });   
-    
+//localStorage.clear(); 
 createProjectBtn.addEventListener('click', (event)  => {
     let p_name = document.querySelector('.project_name').value;
     if(p_name == ""){
@@ -87,6 +95,9 @@ createProjectBtn.addEventListener('click', (event)  => {
     } else {
     projectManager.addProject(p_name);
     selectedProject = p_name;
+
+    itemsArray.push(p_name);
+    localStorage.setItem('items', JSON.stringify(itemsArray));
     renderProjects();
     renderTasks(selectedProject);
     togglePopup();
