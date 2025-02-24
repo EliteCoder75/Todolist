@@ -190,7 +190,7 @@ function renderTasks (selectedProj) {
         newtask.innerHTML = `
             <div class="checkcontainer">
                 <div class="div_task_name">${task.getTaskName()}</div>
-                <input type="checkbox" id="myCheck">
+                <input type="checkbox" id="myCheck" class="myCheck">
             </div>    
             <div class="priority">${task.getPriority()}</div>
             <div class="description">${task.getDescription()}</div>
@@ -251,6 +251,20 @@ body.addEventListener('click', (event) => {
         tsk.editPriority(selectedOption);
         renderTasks(selectedProject);
         toggleTaskEditPopup();   
+    }
+
+    //check box handle
+    if (event.target.matches('.myCheck')) {
+        const taskElements = event.target.parentNode.parentNode.querySelectorAll(".newtask *");
+        if (event.target.checked) {
+            taskElements.forEach((element) => {
+                element.style.textDecoration = "line-through";
+            });
+        } else {
+            taskElements.forEach((element) => {
+                element.style.textDecoration = "none";
+            });
+        }
     }
 
 });
