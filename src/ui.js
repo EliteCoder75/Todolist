@@ -95,9 +95,10 @@ createProjectBtn.addEventListener('click', (event)  => {
     } else {
     projectManager.addProject(p_name);
     selectedProject = p_name;
-
+    
     itemsArray.push(p_name);
     localStorage.setItem('items', JSON.stringify(itemsArray));
+
     renderProjects();
     renderTasks(selectedProject);
     togglePopup();
@@ -140,6 +141,11 @@ deleteProjectBtn.addEventListener('click', (event)  => {
     s.removeAllTasks();
     renderTasks(selectedProject);
     projectManager.deleteProject(selectedProject);
+
+
+    itemsArray = itemsArray.filter(a => a !== selectedProject);
+    localStorage.setItem('items', JSON.stringify(itemsArray));
+
     renderProjects();
     togglePopup1();
 });
