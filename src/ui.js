@@ -86,8 +86,9 @@ createProjectBtn.addEventListener('click', (event)  => {
         alert("empty project name");
     } else {
     projectManager.addProject(p_name);
-    console.log(projectManager.getProjects());
+    selectedProject = p_name;
     renderProjects();
+    renderTasks(selectedProject);
     togglePopup();
     }
 });
@@ -96,7 +97,6 @@ body.addEventListener('click', (event) => {
     //edit_popup
     if (event.target.classList.contains("edit_project_button")) {
         selectedProject = event.target.parentNode.querySelector(".div_project_name").innerText; 
-        console.log(selectedProject);
         document.querySelector('.project_name1').value = selectedProject;
         togglePopup1();      
     }
@@ -113,12 +113,21 @@ body.addEventListener('click', (event) => {
         selectedProject = ne;
         renderProjects();
         togglePopup1();
-
     }
+
+    //render tasks when clicking on a given project 
+    if (event.target.classList.contains("newproject")){
+        selectedProject = event.target.querySelector(".div_project_name").innerText;
+        renderTasks(selectedProject);
+    }
+
 });
 
 deleteProjectBtn.addEventListener('click', (event)  => {
-    console.log(projectManager.getProjects());
+    console.log(selectedProject);
+    let s = projectManager.getProjectByName(selectedProject);
+    s.removeAllTasks();
+    renderTasks(selectedProject);
     projectManager.deleteProject(selectedProject);
     renderProjects();
     togglePopup1();
@@ -143,33 +152,36 @@ closeTaskBtn.addEventListener('click', (event)  => {
 let current_project = null;
 
 createTaskBtn.addEventListener('click', (event)  => {
-    //let current_project = projectManager.getProjectByName(selectedProject);
-    let t_name = document.querySelector('.task_name').value;
-    // retrieve selected option
-    let e = document.getElementById("priority_id");
-    let selectedOption = e.options[e.selectedIndex].text; 
-    // retrieve selected description  
-    let description = document.querySelector("#description").value;
-    // retrieve Date
-    let dateEntered = document.getElementById("date").value;
-    if(t_name == ""){
-        alert("empty task name");
-    } else {
     current_project = projectManager.getProjectByName(selectedProject);
-    current_project.addTask(t_name, selectedOption,description, String(dateEntered));
-    //console.log(task.getDate());
-    
-    toggleTaskPopup();  
+    if (current_project == null) {
+        alert("add project first");
     }
-    renderTasks(selectedProject);    
+    else {
+        //let current_project = projectManager.getProjectByName(selectedProject);
+        let t_name = document.querySelector('.task_name').value;
+        // retrieve selected option
+        let e = document.getElementById("priority_id");
+        let selectedOption = e.options[e.selectedIndex].text; 
+        // retrieve selected description  
+        let description = document.querySelector("#description").value;
+        // retrieve Date
+        let dateEntered = document.getElementById("date").value;
+        if(t_name == ""){
+            alert("empty task name");
+        } else {
+        current_project.addTask(t_name, selectedOption,description, String(dateEntered));
+        //console.log(task.getDate());
+        
+        toggleTaskPopup();  
+        }
+        renderTasks(selectedProject);    }
 })
 
 function renderTasks (selectedProj) {
 
     tasks_container.innerHTML = "";
     current_project = projectManager.getProjectByName(selectedProj);
-    //console.log(current_project);
-    console.log(current_project.getTasks());
+    //console.log(current_project.getTasks());
     current_project.getTasks().forEach(task => {
         // add it after with getDate()
         //console.log(task.getDate());
@@ -227,9 +239,6 @@ body.addEventListener('click', (event) => {
     }
 
     if (event.target.matches('.btn-close-popup3')) { 
-        /*selectedProject = event.target.parentNode.querySelector(".div_project_name").innerText; 
-        console.log(selectedProject);
-        document.querySelector('.project_name1').value = selectedProject;*/
         toggleTaskEditPopup();   
     }
 
