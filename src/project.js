@@ -49,6 +49,10 @@ export class Project {
         this.tasks = this.tasks.filter ( item => item!==name);
     }
 
+    removeAllTasks(){
+        this.tasks = [];
+    }
+
     getTasks(){
         return this.tasks;
     }

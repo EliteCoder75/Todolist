@@ -6,7 +6,6 @@ import { compareAsc, format, parseISO} from "date-fns";
 
 export {renderProjects};
 
-
 import { ProjectManager } from './project.js';
 
 const projectManager = new ProjectManager();
@@ -194,7 +193,7 @@ let p = projectManager.getProjectByName(selectedProject);
 
 // code need more refactoring 
 body.addEventListener('click', (event) => {
-   
+    //// laod edit info
     if (event.target.matches('.priority, .description, .date_entered')) { 
         selectedTask = event.target.parentNode.querySelector(".checkcontainer .div_task_name").innerText;
         document.querySelector('#task_name_id1').value = selectedTask;
@@ -205,6 +204,7 @@ body.addEventListener('click', (event) => {
         toggleTaskEditPopup();   
     }
 
+    //// laod edit info
     if (event.target.matches('.div_task_name')) {  
         selectedTask = event.target.innerText;
         document.querySelector('#task_name_id1').value = selectedTask;
@@ -215,6 +215,7 @@ body.addEventListener('click', (event) => {
         toggleTaskEditPopup();   
     }
 
+    //// laod edit info
     if (event.target.matches('.newtask')) {  
         selectedTask = event.target.querySelector(".checkcontainer .div_task_name").innerText;
         document.querySelector('#task_name_id1').value = selectedTask;
@@ -225,13 +226,21 @@ body.addEventListener('click', (event) => {
         toggleTaskEditPopup();   
     }
 
-
-    
-
     if (event.target.matches('.btn-close-popup3')) { 
         /*selectedProject = event.target.parentNode.querySelector(".div_project_name").innerText; 
         console.log(selectedProject);
         document.querySelector('.project_name1').value = selectedProject;*/
+        toggleTaskEditPopup();   
+    }
+
+    if (event.target.matches('.btn-save-task-popup3')) { 
+        let tsk = p.getTaskByName(selectedTask);
+        tsk.editname(document.querySelector('#task_name_id1').value);
+        tsk.editDescription(document.querySelector('#description1').value);
+        let e = document.querySelector(".task_priority1");
+        let selectedOption = e.options[e.selectedIndex].text;
+        tsk.editPriority(selectedOption);
+        renderTasks(selectedProject);
         toggleTaskEditPopup();   
     }
 
