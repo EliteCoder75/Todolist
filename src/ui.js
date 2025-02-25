@@ -31,28 +31,30 @@
     const saveEditTaskBtn = document.querySelector(".btn-save-task-popup3");
     const popupOverlay3 = document.getElementById('popupOverlay3');
 
+    
+    let checked = false;
 
-
-    // adding default project 
-    projectManager.addProject("Homeworks");
-    let selectedProject = projectManager.getProjects()[0].name;
 
     let itemsArray = localStorage.getItem('items') ?
-    JSON.parse(localStorage.getItem('items')) : [];
+    JSON.parse(localStorage.getItem('items')) : [
+        { name: 'Homeworks', tasks: [] } ];
 
     function update_local_storage (){
         itemsArray.forEach((projectData) => {
             let newProject = projectManager.addProject(projectData.name);
             if (projectData.tasks) {
                 projectData.tasks.forEach(taskData => {
-                    let restoredTask = new Task(taskData.name, taskData.priority, taskData.description, taskData.dueDate);
-                    newProject.addTask(restoredTask.getTaskName(), restoredTask.getPriority(), restoredTask.getDescription(), restoredTask.getDate());
+                    let restoredTask = new Task(taskData.name, taskData.priority, taskData.description, taskData.dueDate, taskData.checked);
+                    newProject.addTask(restoredTask.getTaskName(), restoredTask.getPriority(), restoredTask.getDescription(), restoredTask.getDate(), restoredTask.getChecked());
                 });
             }
         });
     }
 
     update_local_storage();
+
+    // default selected project
+    let selectedProject = projectManager.getProjects()[0].name;
 
     // toggle popups for projects
     function togglePopup() { 
@@ -185,12 +187,11 @@
             // retrieve selected option
             let e = document.querySelector(".task_priority");
             let selectedOption = e.options[e.selectedIndex].text; 
-
-            //tsk.editPriority(selectedOption); 
             // retrieve selected description  
             let description = document.querySelector("#description").value;
             // retrieve Date
             let dateEntered = document.getElementById("date").value;
+
             if(t_name == ""){
                 alert("empty task name");
             } else {            
@@ -203,10 +204,8 @@
                 itemsArray[projectIndex].tasks = current_project.getTasks();
             }
             localStorage.setItem('items', JSON.stringify(itemsArray));
-
             //console.log(task.getDate());
             toggleTaskPopup(); 
-
             }
             renderTasks(selectedProject);    }
     })
@@ -291,13 +290,11 @@
         if (event.target.matches('.btn-delete-task-popup3')) {
             console.log(document.querySelector('#task_name_id1').value);
 
-            //itemsArray.splice(itemsArray.findIndex(v => v.name === selectedProject), 1);
+            //find project index
             let projectIndex = itemsArray.findIndex(v => v.name === selectedProject);
-            //console.log(itemsArray[projectIndex]);
             let obj = itemsArray[projectIndex].tasks;
             obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject)
             itemsArray[projectIndex].tasks = obj;
-            //console.log(projectManager.getProjectByName(selectedProject).getTasks());
             projectManager.getProjectByName(selectedProject).removeTask(document.querySelector('#task_name_id1').value);
             localStorage.setItem('items', JSON.stringify(itemsArray));
             renderTasks(selectedProject);
@@ -306,16 +303,37 @@
 
         //check box handle
         if (event.target.matches('.myCheck')) {
+            selectedTask = event.target.parentNode.querySelector(".checkcontainer .div_task_name").innerText;
+            let tsk = projectManager.getProjectByName(selectedProject).getTaskByName(selectedTask);
             const taskElements = event.target.parentNode.parentNode.querySelectorAll(".newtask *");
             if (event.target.checked) {
+                checked = true;
+                tsk.editChecked(checked);
+                console.log(tsk);
+
                 taskElements.forEach((element) => {
                     element.style.textDecoration = "line-through";
                 });
             } else {
+                checked = false;
+                tsk.editChecked(checked);
+                console.log(tsk);
                 taskElements.forEach((element) => {
                     element.style.textDecoration = "none";
                 });
             }
+            let projectIndex = itemsArray.findIndex(v => v.name === selectedProject);
+            let obj = itemsArray[projectIndex].tasks;
+            obj.forEach((task) => {
+                if(task.name === selectedTask) {
+                    task.checked = checked;
+                }
+            } );
+            itemsArray[projectIndex].tasks = obj;
+            //obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject)
+            //console.log (obj);
+            //itemsArray[projectIndex].tasks = obj;
+
             localStorage.setItem('items', JSON.stringify(itemsArray));
 
         }
@@ -324,7 +342,7 @@
 
 
 /*localStorage.clear();
-itemsArray = [];*/  
+itemsArray = []; */
 
 
 
