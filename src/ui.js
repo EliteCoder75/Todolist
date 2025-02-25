@@ -183,8 +183,10 @@
             //let current_project = projectManager.getProjectByName(selectedProject);
             let t_name = document.querySelector('.task_name').value;
             // retrieve selected option
-            let e = document.getElementById("priority_id");
+            let e = document.querySelector(".task_priority");
             let selectedOption = e.options[e.selectedIndex].text; 
+
+            //tsk.editPriority(selectedOption); 
             // retrieve selected description  
             let description = document.querySelector("#description").value;
             // retrieve Date
@@ -293,18 +295,10 @@
             let projectIndex = itemsArray.findIndex(v => v.name === selectedProject);
             //console.log(itemsArray[projectIndex]);
             let obj = itemsArray[projectIndex].tasks;
-            console.log (obj);
-            obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject);
-            console.log (obj);
-
+            obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject)
             itemsArray[projectIndex].tasks = obj;
             //console.log(projectManager.getProjectByName(selectedProject).getTasks());
             projectManager.getProjectByName(selectedProject).removeTask(document.querySelector('#task_name_id1').value);
-            //console.log(projectManager.getProjectByName(selectedProject).getTasks());
-
-            
-           // itemsArray.splice(itemsArray.findIndex(v => v.name === selectedProject), 1);
-
             localStorage.setItem('items', JSON.stringify(itemsArray));
             renderTasks(selectedProject);
             toggleTaskEditPopup();
