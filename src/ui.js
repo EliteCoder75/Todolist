@@ -40,16 +40,19 @@
     let itemsArray = localStorage.getItem('items') ?
     JSON.parse(localStorage.getItem('items')) : [];
 
-    itemsArray.forEach((projectData, index) => {
-        let newProject = projectManager.addProject(projectData.name);
-        if (projectData.tasks) {
-            projectData.tasks.forEach(taskData => {
-                let restoredTask = new Task(taskData.name, taskData.priority, taskData.description, taskData.dueDate);
-                newProject.addTask(restoredTask.getTaskName(), restoredTask.getPriority(), restoredTask.getDescription(), restoredTask.getDate());
-            });
-        }
-    });
+    function update_local_storage (){
+        itemsArray.forEach((projectData) => {
+            let newProject = projectManager.addProject(projectData.name);
+            if (projectData.tasks) {
+                projectData.tasks.forEach(taskData => {
+                    let restoredTask = new Task(taskData.name, taskData.priority, taskData.description, taskData.dueDate);
+                    newProject.addTask(restoredTask.getTaskName(), restoredTask.getPriority(), restoredTask.getDescription(), restoredTask.getDate());
+                });
+            }
+        });
+    }
 
+    update_local_storage();
 
     // toggle popups for projects
     function togglePopup() { 
@@ -285,9 +288,24 @@
         
         if (event.target.matches('.btn-delete-task-popup3')) {
             console.log(document.querySelector('#task_name_id1').value);
-            console.log(projectManager.getProjectByName(selectedProject).getTasks());
+
+            //itemsArray.splice(itemsArray.findIndex(v => v.name === selectedProject), 1);
+            let projectIndex = itemsArray.findIndex(v => v.name === selectedProject);
+            //console.log(itemsArray[projectIndex]);
+            let obj = itemsArray[projectIndex].tasks;
+            console.log (obj);
+            obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject);
+            console.log (obj);
+
+            itemsArray[projectIndex].tasks = obj;
+            //console.log(projectManager.getProjectByName(selectedProject).getTasks());
             projectManager.getProjectByName(selectedProject).removeTask(document.querySelector('#task_name_id1').value);
-            console.log(projectManager.getProjectByName(selectedProject).getTasks())
+            //console.log(projectManager.getProjectByName(selectedProject).getTasks());
+
+            
+           // itemsArray.splice(itemsArray.findIndex(v => v.name === selectedProject), 1);
+
+            localStorage.setItem('items', JSON.stringify(itemsArray));
             renderTasks(selectedProject);
             toggleTaskEditPopup();
         }   
@@ -311,8 +329,8 @@
     });
 
 
-localStorage.clear();
-itemsArray = [];  
+/*localStorage.clear();
+itemsArray = [];*/  
 
 
 
