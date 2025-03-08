@@ -49,6 +49,7 @@ function update_local_storage() {
           restoredTask.getDate(),
           restoredTask.getChecked(),
         );
+        
       });
     }
   });
@@ -58,6 +59,7 @@ update_local_storage();
 
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
+
 
 // toggle popups for projects
 function togglePopup() {
@@ -151,6 +153,15 @@ body.addEventListener("click", (event) => {
   if (event.target.classList.contains("newproject")) {
     selectedProject = event.target.querySelector(".div_project_name").innerText;
     renderTasks(selectedProject);
+////////////
+    /*if (newProject.restoredTask.checked) {
+      const taskElements = event.target.parentNode.parentNode.querySelectorAll(".newtask *");
+      taskElements.forEach((element) => {
+        element.style.textDecoration = "line-through";
+      });
+    }*/
+
+ ///////////////   
   }
 });
 
@@ -245,11 +256,23 @@ function renderTasks(selectedProj) {
                 </div> 
                 <div class="priority">${task.getPriority()}</div>
                 <div class="description">${task.getDescription()}</div>
+                <div class="checked">${task.getChecked()}</div>
                 <div class="date_entered">2025-02-27</div>
             `;
+            
     tasks_container.appendChild(newtask);
   });
 }
+
+let project = projectManager.getProjectByName(selectedProject);
+    project.getTasks().forEach( (task) => {
+      if (task.checked) {
+        const taskElements = event.target.parentNode.parentNode.querySelectorAll(".newtask *");
+        taskElements.forEach((element) => {
+        element.style.textDecoration = "line-through";
+            });
+          }
+      } );
 
 let selectedTask = null;
 
@@ -357,6 +380,19 @@ body.addEventListener("click", (event) => {
 
   //check box handle
   if (event.target.matches(".myCheck")) {
+
+    //local storage function
+    let projectIndex = itemsArray.findIndex((v) => v.name === selectedProject);
+    let obj = itemsArray[projectIndex].tasks;
+    function setCheckStorage() {
+      obj.forEach((task) => {
+        if (task.name === selectedTask) {
+          task.checked = checked;
+        }
+      });
+    }
+
+    //logic
     selectedTask = event.target.parentNode.querySelector(
       ".checkcontainer .div_task_name",
     ).innerText;
@@ -368,7 +404,7 @@ body.addEventListener("click", (event) => {
     if (event.target.checked) {
       checked = true;
       tsk.editChecked(checked);
-      console.log(tsk);
+      setCheckStorage();
 
       taskElements.forEach((element) => {
         element.style.textDecoration = "line-through";
@@ -376,18 +412,13 @@ body.addEventListener("click", (event) => {
     } else {
       checked = false;
       tsk.editChecked(checked);
-      console.log(tsk);
+      setCheckStorage();
       taskElements.forEach((element) => {
         element.style.textDecoration = "none";
       });
     }
-    let projectIndex = itemsArray.findIndex((v) => v.name === selectedProject);
-    let obj = itemsArray[projectIndex].tasks;
-    obj.forEach((task) => {
-      if (task.name === selectedTask) {
-        task.checked = checked;
-      }
-    });
+    
+    
     itemsArray[projectIndex].tasks = obj;
     //obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject)
     //console.log (obj);
