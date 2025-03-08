@@ -17,7 +17,6 @@ const popupOverlay = document.getElementById("popupOverlay");
 const popupOverlay1 = document.getElementById("popupOverlay1");
 const popupOverlay2 = document.getElementById("popupOverlay2");
 const body = document.querySelector("body");
-
 const addTaskBtn = document.querySelector(".add_task");
 const closeTaskBtn = document.querySelector(".btn-close-popup2");
 const createTaskBtn = document.querySelector(".btn-create-task");
@@ -123,6 +122,9 @@ body.addEventListener("click", (event) => {
     selectedProject =
       event.target.parentNode.querySelector(".div_project_name").innerText;
     document.querySelector(".project_name1").value = selectedProject;
+
+    //update local storage
+
     togglePopup1();
   }
   // close edit popup
@@ -136,6 +138,11 @@ body.addEventListener("click", (event) => {
     var old = selectedProject;
     projectManager.editProject(ne, old);
     selectedProject = ne;
+    
+    let i = itemsArray.findIndex((v) => v.name === old);
+    itemsArray[i].name = ne;
+    localStorage.setItem("items", JSON.stringify(itemsArray));
+
     renderProjects();
     togglePopup1();
   }
@@ -235,7 +242,7 @@ function renderTasks(selectedProj) {
                 <div class="checkcontainer">
                     <div class="div_task_name">${task.getTaskName()}</div>
                     <input type="checkbox" id="myCheck" class="myCheck">
-                </div>    
+                </div> 
                 <div class="priority">${task.getPriority()}</div>
                 <div class="description">${task.getDescription()}</div>
                 <div class="date_entered">2025-02-27</div>
@@ -277,7 +284,7 @@ body.addEventListener("click", (event) => {
   }
 
   //// laod edit info
-  if (event.target.matches(".newtask")) {
+  if (event.target.matches(".newtask")) {   
     selectedTask = event.target.querySelector(
       ".checkcontainer .div_task_name",
     ).innerText;
@@ -369,5 +376,7 @@ body.addEventListener("click", (event) => {
   }
 });
 
+
+//used to clear the localStorage saved array
 /*localStorage.clear();
 itemsArray = []; */
