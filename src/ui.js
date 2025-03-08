@@ -253,6 +253,13 @@ function renderTasks(selectedProj) {
 
 let selectedTask = null;
 
+function setSelectBoxByText(k, etxt) {
+  for (var i = 0; i < k.options.length; ++i) {
+      if (k.options[i].text === etxt)
+          k.options[i].selected = true;
+
+  }
+}
 // code need more refactoring
 body.addEventListener("click", (event) => {
   //// laod edit info
@@ -265,8 +272,11 @@ body.addEventListener("click", (event) => {
       .getProjectByName(selectedProject)
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk1.getDescription();
+    /*e.value = tsk1.getPriority();
+    console.log(e);*/
     let e = document.querySelector("#priority_id1");
-    e.options[e.selectedIndex].text = tsk1.getPriority();
+    setSelectBoxByText(e,tsk1.getPriority());
+
     toggleTaskEditPopup();
   }
 
@@ -279,7 +289,7 @@ body.addEventListener("click", (event) => {
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk2.getDescription();
     let e = document.querySelector("#priority_id1");
-    e.options[e.selectedIndex].text = tsk2.getPriority();
+    setSelectBoxByText(e,tsk2.getPriority());
     toggleTaskEditPopup();
   }
 
@@ -294,7 +304,7 @@ body.addEventListener("click", (event) => {
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk3.getDescription();
     let e = document.querySelector("#priority_id1");
-    e.options[e.selectedIndex].text = tsk3.getPriority();
+    setSelectBoxByText(e,tsk3.getPriority());
     toggleTaskEditPopup();
   }
 
@@ -312,6 +322,17 @@ body.addEventListener("click", (event) => {
     let e = document.querySelector(".task_priority1");
     let selectedOption = e.options[e.selectedIndex].text;
     tsk.editPriority(selectedOption);
+
+    //localstorage update
+    // Update the corresponding project in localStorage
+    let projectIndex = itemsArray.findIndex(
+      (v) => v.name === selectedProject,
+    );
+    if (projectIndex !== -1) {
+      itemsArray[projectIndex].tasks = current_project.getTasks();
+    }
+    localStorage.setItem("items", JSON.stringify(itemsArray));
+
     renderTasks(selectedProject);
     toggleTaskEditPopup();
   }
