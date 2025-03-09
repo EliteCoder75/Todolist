@@ -149,6 +149,7 @@ body.addEventListener("click", (event) => {
     selectedProject = event.target.querySelector(".div_project_name").innerText;
     renderTasks(selectedProject); 
   }
+
 });
 
 deleteProjectBtn.addEventListener("click", () => {
