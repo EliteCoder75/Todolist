@@ -40,7 +40,6 @@ let itemsArray = localStorage.getItem("items")
 function update_local_storage() {
   itemsArray.forEach((projectData) => {
     let newProject = projectManager.addProject(projectData.name);
-    console.log(newProject);
     if (projectData.tasks) {
       projectData.tasks.forEach((taskData) => {
         let restoredTask = new Task(
@@ -60,6 +59,11 @@ function update_local_storage() {
         
       });
     }
+
+    if (projectData.name === "Homeworks") {
+      newProject.addTask("Default Task", "Low", "This is a default task", "2024-03-16", false);
+      newProject.addTask("complete Todo App", "High", "nice project", "2024-03-16", false);
+    }
   });
 }
 
@@ -67,7 +71,9 @@ update_local_storage();
 
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
-//renderProjects();
+let current_project = null;
+
+renderTasks(selectedProject);
 
 
 // toggle popups for projects
@@ -194,7 +200,6 @@ closeTaskBtn.addEventListener("click", () => {
   toggleTaskPopup();
 });
 
-let current_project = null;
 
 createTaskBtn.addEventListener("click", () => {
   current_project = projectManager.getProjectByName(selectedProject);
@@ -292,6 +297,7 @@ body.addEventListener("click", (event) => {
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk1.getDescription();
     let e = document.querySelector("#priority_id1");
+    console.log(projectManager.getProjectByName(selectedProject));
     setSelectBoxByText(e,tsk1.getPriority());
 
     toggleTaskEditPopup();
