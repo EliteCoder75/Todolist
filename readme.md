@@ -1,4 +1,4 @@
-* ToDo list project:
+#ToDo list project:
 
 credit: 
 - icons from flaticon (https://www.flaticon.com/)
