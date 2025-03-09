@@ -38,11 +38,13 @@ export class Project {
     this.tasks = [];
   }
 
-  addTask(name, priority, description) {
-    var task = new Task(name, priority, description);
+  addTask(name, priority, description, dueDate, checked) {
+    console.log("addTask Received:", name, priority, description, dueDate, checked); // Debugging
+    var task = new Task(name, priority, description, dueDate, checked);
     this.tasks.push(task);
     return task;
   }
+
 
   removeTask(name) {
     this.tasks = this.tasks.filter((item) => item.name !== name);

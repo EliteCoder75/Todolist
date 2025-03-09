@@ -3,13 +3,17 @@ import { format,isValid, parseISO } from 'date-fns';
 
 export class Task {
     constructor(name, priority, description, dueDate, checked) {
+        console.log("Received dueDate:", dueDate); // Debugging line
         this.name = name;
         this.priority = priority;
         this.description = description;
-        // Ensure `dueDate` is a valid Date object
-        // Ensure the date is valid before assigning
-        this.dueDate = dueDate;
+
+        // Ensure that dueDate is properly set
+        this.dueDate = format(dueDate, "yyyy-MM-dd");;
         this.checked = checked;
+
+        console.log("Stored dueDate:", this.dueDate); // Debugging line
+
         
     }
 

@@ -1,7 +1,7 @@
 import img1 from "./images/folder-management.png";
 import { Task } from "./task.js";
 
-//import { compareAsc, format, parseISO} from "date-fns";
+import { compareAsc, format, parseISO} from "date-fns";
 
 export { renderProjects };
 
@@ -212,6 +212,7 @@ createTaskBtn.addEventListener("click", () => {
     let description = document.querySelector("#description").value;
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
+    //let formattedDate = format(dateEntered, "yyyy-MM-dd");
 
     if (t_name == "") {
       alert("empty task name");
@@ -221,7 +222,7 @@ createTaskBtn.addEventListener("click", () => {
         t_name,
         selectedOption,
         description,
-        String(dateEntered),
+        dateEntered,
       );
 
       // Update the corresponding project in localStorage
@@ -256,10 +257,9 @@ function renderTasks(selectedProj) {
                 </div> 
                 <div class="priority">${task.getPriority()}</div>
                 <div class="description">${task.getDescription()}</div>
-                <div class="checked">${task.getChecked()}</div>
-                <div class="date_entered">2025-02-27</div>
+                <div class="date_entered">${task.getDate()}</div>
             `;
-            
+    console.log(task.getDate());        
     tasks_container.appendChild(newtask);
   });
 }
