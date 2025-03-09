@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "myFont";
+    src: url("./CSS/Fira_Sans/FiraSans-Bold.ttf");
+  }
+
+
+@font-face {
+font-family: "latoFont";
+src: url("./CSS/Lato/Lato-Bold.ttf");
+}  
+
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -6,6 +17,7 @@
 /* 2. Remove default margin */
 * {
   margin: 0;
+  font-family: "myFont";
 }
 
 body {
@@ -53,6 +65,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo {
   flex: 0 1 0;
+  height: 50px;
+  width: 50px;
 }
   
 body {
@@ -88,8 +102,9 @@ body {
 }
 
 .icon {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
+  align-self: center;
 }
 
 .newproject {
@@ -97,6 +112,11 @@ body {
   background-color: black;
   border-radius: 20px;
   justify-content: space-around;
+  height: 45px;
+}
+
+.newproject:hover {
+  background-color: rgb(0, 0, 146);
 }
 
 .edit_project_button {
@@ -108,14 +128,17 @@ body {
   align-self: center;
 }
 
+.edit_project_button:hover {
+  background-color: #4caf50;
+}
+
+
 .edit_project_button:active{
   background:olive;
 }
 
-
 .project_name {
   justify-content: center;
-
 }
 
 .projects_container {
@@ -133,6 +156,10 @@ body {
   justify-content: center;
 }
 
+.add_project:hover {
+  background-color: #b6b6b6;
+}
+
 .btn-open-popup, .add_task {
   padding: 12px 24px;
   font-size: 18px;
@@ -144,7 +171,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.btn-open-popup:hover {
+.btn-open-popup:hover, .add_task:hover {
   background-color: #4caf50;
 }
 
@@ -211,20 +238,21 @@ body {
 
 
 .btn-create-popup,
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task, .priority {
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1,.btn-Save-popup1,.btn-close-popup2,.btn-create-task, .priority,.btn-close-popup3,.btn-delete-task-popup3,.btn-save-task-popup3 {
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
+  
 }
 
-.btn-create-popup,.btn-Save-popup1 {
+.btn-create-popup,.btn-Save-popup1,.btn-save-task-popup3{
   background-color: green;
   color: #fff;
 }
 
-.btn-close-popup,.btn-delete-popup1,.btn-close-popup1, .btn-close-popup2, .priority{
+.btn-close-popup,.btn-delete-popup1,.btn-close-popup1, .btn-close-popup2, .priority ,.btn-close-popup3,.btn-delete-task-popup3{
   margin-top: 12px;
   background-color: #e74c3c;
   color: #fff;
@@ -234,7 +262,7 @@ body {
 .btn-close-popup:hover,
 .btn-delete-popup1:hover,
 .btn-close-popup1:hover,
-.btn-Save-popup1:hover {
+.btn-Save-popup1:hover,.btn-close-popup3:hover,.btn-delete-task-popup3:hover,.btn-save-task-popup3:hover, .btn-close-popup2:hover, .btn-create-task:hover{
   background-color: #4caf50;
 }
 
@@ -275,6 +303,10 @@ body {
   cursor: pointer;
 }
 
+.newtask:hover {
+  background-color: #b6b6b6;
+}
+
 .div_task_name {
   flex: 2 1 auto;
   color: black;
@@ -291,16 +323,33 @@ body {
   gap: 15px;
 }
 
-#checkbox {
-}
-
 .priority {
   width: 100px;
 }
 
 .description {
   overflow: hidden;
-
 }
+
+.logo_container>div{
+  font-family:'Times New Roman', Times, serif;
+  font-size:xx-large;
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+input.task_name, select.task_priority1, textarea#description1, input#date1, input.project_name1,
+select.task_priority, textarea#description, input#date, input.project_name{
+  color: black;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
 
 

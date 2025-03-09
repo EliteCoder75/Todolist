@@ -24,6 +24,11 @@ const popupOverlay3 = document.getElementById("popupOverlay3");
 
 let checked = false;
 
+if (typeof localStorage !== "undefined") {
+  console.log("localStorage is available");
+} else {
+  console.log("localStorage is not available in this environment");
+}
 let itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
   : [{ name: "Homeworks", tasks: [] }];
@@ -50,6 +55,11 @@ function update_local_storage() {
         
       });
     }
+
+    if (projectData.name === "Homeworks") {
+      newProject.addTask("Default Task", "Low", "This is a default task", "2024-03-16", false);
+      newProject.addTask("complete Todo App", "High", "nice project", "2024-03-16", false);
+    }
   });
 }
 
@@ -57,6 +67,8 @@ update_local_storage();
 
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
+let current_project = null;
+renderTasks(selectedProject);
 
 
 // toggle popups for projects
@@ -149,6 +161,7 @@ body.addEventListener("click", (event) => {
     selectedProject = event.target.querySelector(".div_project_name").innerText;
     renderTasks(selectedProject); 
   }
+
 });
 
 deleteProjectBtn.addEventListener("click", () => {
@@ -182,7 +195,6 @@ closeTaskBtn.addEventListener("click", () => {
   toggleTaskPopup();
 });
 
-let current_project = null;
 
 createTaskBtn.addEventListener("click", () => {
   current_project = projectManager.getProjectByName(selectedProject);
@@ -198,11 +210,12 @@ createTaskBtn.addEventListener("click", () => {
     let description = document.querySelector("#description").value;
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
-    //let formattedDate = format(dateEntered, "yyyy-MM-dd");
-
     if (t_name == "") {
       alert("empty task name");
-    } else {
+    } else if (dateEntered == "") {
+      alert ("enter a valid date");
+    }  
+    else {
       ///i want to change this to include tasks with there respective projects
       current_project.addTask(
         t_name,
@@ -276,6 +289,7 @@ body.addEventListener("click", (event) => {
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk1.getDescription();
     let e = document.querySelector("#priority_id1");
+    console.log(projectManager.getProjectByName(selectedProject));
     setSelectBoxByText(e,tsk1.getPriority());
 
     toggleTaskEditPopup();
