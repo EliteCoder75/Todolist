@@ -33,10 +33,6 @@ let itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
   : [{ name: "Homeworks", tasks: [] }];
 
-//localStorage.setItem("items", JSON.stringify([{ name: "Homeworks", tasks: [] }]));
-
-
-
 function update_local_storage() {
   itemsArray.forEach((projectData) => {
     let newProject = projectManager.addProject(projectData.name);
@@ -72,7 +68,6 @@ update_local_storage();
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
 let current_project = null;
-
 renderTasks(selectedProject);
 
 
@@ -215,9 +210,6 @@ createTaskBtn.addEventListener("click", () => {
     let description = document.querySelector("#description").value;
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
-    console.log("date"+dateEntered);
-    //let formattedDate = format(dateEntered, "yyyy-MM-dd");
-
     if (t_name == "") {
       alert("empty task name");
     } else if (dateEntered == "") {
