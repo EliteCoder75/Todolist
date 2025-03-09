@@ -395,7 +395,7 @@ body.addEventListener("click", (event) => {
         element.style.textDecoration = "none";
       });
     }
-    
+    console.log("hello hellu helloy");
     itemsArray[projectIndex].tasks = obj;
     localStorage.setItem("items", JSON.stringify(itemsArray));
   }
