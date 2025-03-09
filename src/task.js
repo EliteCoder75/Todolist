@@ -7,8 +7,14 @@ export class Task {
         this.name = name;
         this.priority = priority;
         this.description = description;
+
+        // Ensure that dueDate is properly set
         this.dueDate = format(dueDate, "yyyy-MM-dd");;
         this.checked = checked;
+
+        console.log("Stored dueDate:", this.dueDate); // Debugging line
+
+        
     }
 
     editname (name) {

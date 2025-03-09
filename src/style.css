@@ -132,6 +132,7 @@ body {
   background-color: #4caf50;
 }
 
+
 .edit_project_button:active{
   background:olive;
 }
@@ -194,6 +195,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
+
 .popup-box {
   background: #fff;
   padding: 24px;
@@ -205,6 +207,8 @@ body {
   transform: scale(0.8);
   animation: fadeInUp 0.5s ease-out forwards;
 }
+
+
 
 .form-label {
   margin-bottom: 10px;
@@ -299,9 +303,6 @@ body {
   cursor: pointer;
 }
 
-.newtask:hover {
-  background-color: #b6b6b6;
-}
 .div_task_name {
   flex: 2 1 auto;
   color: black;

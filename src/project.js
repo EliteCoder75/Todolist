@@ -29,6 +29,7 @@ export class ProjectManager {
   getProjectByName(name) {
     return this.projects.find((project) => project.name === name);
   }
+  //edit_project .....
 }
 
 export class Project {
@@ -38,7 +39,7 @@ export class Project {
   }
 
   addTask(name, priority, description, dueDate, checked) {
-    console.log("addTask Received:", name, priority, description, dueDate, checked); 
+    console.log("addTask Received:", name, priority, description, dueDate, checked); // Debugging
     var task = new Task(name, priority, description, dueDate, checked);
     this.tasks.push(task);
     return task;
