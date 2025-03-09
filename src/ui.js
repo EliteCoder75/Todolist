@@ -1,8 +1,6 @@
 import img1 from "./images/folder-management.png";
 import { Task } from "./task.js";
 
-import { compareAsc, format, parseISO} from "date-fns";
-
 export { renderProjects };
 
 import { ProjectManager } from "./project.js";
@@ -124,9 +122,6 @@ body.addEventListener("click", (event) => {
     selectedProject =
       event.target.parentNode.querySelector(".div_project_name").innerText;
     document.querySelector(".project_name1").value = selectedProject;
-
-    //update local storage
-
     togglePopup1();
   }
   // close edit popup
@@ -152,16 +147,7 @@ body.addEventListener("click", (event) => {
   //render tasks when clicking on a given project
   if (event.target.classList.contains("newproject")) {
     selectedProject = event.target.querySelector(".div_project_name").innerText;
-    renderTasks(selectedProject);
-////////////
-    /*if (newProject.restoredTask.checked) {
-      const taskElements = event.target.parentNode.parentNode.querySelectorAll(".newtask *");
-      taskElements.forEach((element) => {
-        element.style.textDecoration = "line-through";
-      });
-    }*/
-
- ///////////////   
+    renderTasks(selectedProject); 
   }
 });
 
@@ -233,7 +219,6 @@ createTaskBtn.addEventListener("click", () => {
         itemsArray[projectIndex].tasks = current_project.getTasks();
       }
       localStorage.setItem("items", JSON.stringify(itemsArray));
-      //console.log(task.getDate());
       toggleTaskPopup();
     }
     renderTasks(selectedProject);
@@ -243,11 +228,7 @@ createTaskBtn.addEventListener("click", () => {
 function renderTasks(selectedProj) {
   tasks_container.innerHTML = "";
   current_project = projectManager.getProjectByName(selectedProj);
-  //console.log(current_project.getTasks());
   current_project.getTasks().forEach((task) => {
-    // add it after with getDate()
-    //console.log(task.getDate());
-
     var newtask = document.createElement("div");
     newtask.classList.add("newtask"); // also removed the dot prefix here
     newtask.innerHTML = `
@@ -280,7 +261,6 @@ function setSelectBoxByText(k, etxt) {
   for (var i = 0; i < k.options.length; ++i) {
       if (k.options[i].text === etxt)
           k.options[i].selected = true;
-
   }
 }
 // code need more refactoring
@@ -295,8 +275,6 @@ body.addEventListener("click", (event) => {
       .getProjectByName(selectedProject)
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk1.getDescription();
-    /*e.value = tsk1.getPriority();
-    console.log(e);*/
     let e = document.querySelector("#priority_id1");
     setSelectBoxByText(e,tsk1.getPriority());
 
@@ -368,7 +346,7 @@ body.addEventListener("click", (event) => {
     let obj = itemsArray[projectIndex].tasks;
     obj = obj.filter(
       (item) => item.name !== document.querySelector("#task_name_id1").value,
-    ); //.findIndex(v => v.name === selectedProject)
+    ); 
     itemsArray[projectIndex].tasks = obj;
     projectManager
       .getProjectByName(selectedProject)
@@ -418,12 +396,7 @@ body.addEventListener("click", (event) => {
       });
     }
     
-    
     itemsArray[projectIndex].tasks = obj;
-    //obj = obj.filter(item => item.name !== document.querySelector('#task_name_id1').value);//.findIndex(v => v.name === selectedProject)
-    //console.log (obj);
-    //itemsArray[projectIndex].tasks = obj;
-
     localStorage.setItem("items", JSON.stringify(itemsArray));
   }
 });
