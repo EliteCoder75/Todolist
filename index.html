@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="609a232ab53e413e38d2.css">
+<script defer src="main.js"></script></head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo_container">
+            <img class= "logo" src="6ffb3ef166f68df8c9a5.png" alt="Italian Trulli" width="50" height="50">
+            <div>TickTickBoom</div>
+        </div>
+        <div class="projects_container" id="content">
+        </div>
+        <button class="add_project" type="button"><img class="icon" src="60a5243d74b30a5a424e.png" alt="">New Project</button>
+    </div>
+    <div class="main">
+        <div class="header_of_tasks">
+            <h1>Tasks</h1>
+            <button class="add_task" type="button">New</button>
+        </div>
+        <div class="tasks_div">
+        </div>
+    </div>  
+
+    <div id="popupOverlay" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">New Project</h2>
+            <form class=".form-container">
+                <input class="project_name" type="text" 
+                        placeholder="Project Name" 
+                        id="project_n" name="name" required>
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup" >
+                    Cancel
+                </button>
+                <button class="btn-create-popup" >
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="popupOverlay1" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">New Project</h2>
+            <form class=".form-container">
+                <input class="project_name1" type="text" 
+                        placeholder="Project Name" 
+                        id="project_n1" name="name" required>
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup1" >
+                    Cancel
+                </button>
+                <button class="btn-delete-popup1" >
+                    Delete
+                </button>
+                <button class="btn-Save-popup1" >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupOverlay2" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">New Task</h2>
+            <form class=".form-container">
+                <label>Name</label>
+                <br>
+                <input class="task_name" type="text" 
+                        placeholder="Task Name" 
+                        id="task_name_id" name="name" required>
+                        <br>
+                        <br>     
+                <label>Priority</label>
+                <br>
+                <select name="priority" id="priority_id" class="task_priority">
+                    <option value="first">High</option>
+                    <option value="second">Medium</option>
+                    <option value="third">Low</option>
+                </select>
+                <br> 
+                <br>
+                <label>description</label>
+                <br>
+                <textarea id="description" name="description" rows="5" cols="33">
+                </textarea>
+                <br>
+                <br>
+                <label>Date</label>
+                <br>
+                <input type="date" id="date" name="tday" />
+                <br><br>
+                
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup2" >
+                    Cancel
+                </button>
+                <button class="btn-create-task" >
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupOverlay3" class="overlay-container">
+        <div class="popup-box">
+            <h2 style="color: green;">Task</h2>
+            <form class=".form-container">
+                <label>Name</label>
+                <br>
+                <input class="task_name" type="text" 
+                        placeholder="Task Name" 
+                        id="task_name_id1" name="name" required>
+                        <br>
+                        <br>     
+                <label>Priority</label>
+                <br>
+                <select name="priority" id="priority_id1" class="task_priority1">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <br> 
+                <br>
+                <label>description</label>
+                <br>
+                <textarea id="description1" name="description" rows="5" cols="33">
+                </textarea>
+                <br>
+                <br>
+                <label>Date</label>
+                <br>
+                <input type="date" id="date1" name="tday" />
+                <br><br>
+                
+            </form>
+            <div class = "cancel_create">
+                <button class="btn-close-popup3" >
+                    Cancel
+                </button>
+                <button class="btn-delete-task-popup3" >
+                    Delete
+                </button>
+                <button class="btn-save-task-popup3" >
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
