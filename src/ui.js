@@ -26,7 +26,7 @@ let checked = false;
 
 let itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
-  : [{ name: "Homeworks", tasks: [] }];
+  : [{ name: "Homeworks", tasks: [{name: 'first task', priority: 'High', description: 'important', dueDate: '2025-03-26', checked: false}] }];
 
 function update_local_storage() {
   itemsArray.forEach((projectData) => {
@@ -54,9 +54,9 @@ function update_local_storage() {
 }
 
 update_local_storage();
-
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
+renderProjects();
 
 
 // toggle popups for projects
@@ -70,7 +70,7 @@ function togglePopup1() {
 // toggle popup for tasks
 function toggleTaskPopup() {
   task_name.value = "";
-  document.querySelector("#description").value = " ";
+  document.querySelector("#description").value = "";
   document.querySelector("input[type=date]").value = "";
   popupOverlay2.classList.toggle("show");
 }
@@ -277,8 +277,9 @@ body.addEventListener("click", (event) => {
       .getTaskByName(selectedTask);
     document.querySelector("#description1").value = tsk1.getDescription();
     let e = document.querySelector("#priority_id1");
-    setSelectBoxByText(e,tsk1.getPriority());
 
+    console.log(projectManager.getProjectByName(selectedProject));
+    setSelectBoxByText(e,tsk1.getPriority());
     toggleTaskEditPopup();
   }
 
@@ -404,5 +405,5 @@ body.addEventListener("click", (event) => {
 
 
 //used to clear the localStorage saved array
-/*localStorage.clear();
-itemsArray = []; */
+localStorage.clear();
+itemsArray = []; 
