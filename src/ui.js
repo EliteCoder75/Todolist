@@ -24,13 +24,23 @@ const popupOverlay3 = document.getElementById("popupOverlay3");
 
 let checked = false;
 
+if (typeof localStorage !== "undefined") {
+  console.log("localStorage is available");
+} else {
+  console.log("localStorage is not available in this environment");
+}
 let itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
   : [{ name: "Homeworks", tasks: [] }];
 
+//localStorage.setItem("items", JSON.stringify([{ name: "Homeworks", tasks: [] }]));
+
+
+
 function update_local_storage() {
   itemsArray.forEach((projectData) => {
     let newProject = projectManager.addProject(projectData.name);
+    console.log(newProject);
     if (projectData.tasks) {
       projectData.tasks.forEach((taskData) => {
         let restoredTask = new Task(
@@ -57,6 +67,7 @@ update_local_storage();
 
 // default selected project
 let selectedProject = projectManager.getProjects()[0].name;
+//renderProjects();
 
 
 // toggle popups for projects
@@ -199,11 +210,15 @@ createTaskBtn.addEventListener("click", () => {
     let description = document.querySelector("#description").value;
     // retrieve Date
     let dateEntered = document.getElementById("date").value;
+    console.log("date"+dateEntered);
     //let formattedDate = format(dateEntered, "yyyy-MM-dd");
 
     if (t_name == "") {
       alert("empty task name");
-    } else {
+    } else if (dateEntered == "") {
+      alert ("enter a valid date");
+    }  
+    else {
       ///i want to change this to include tasks with there respective projects
       current_project.addTask(
         t_name,
